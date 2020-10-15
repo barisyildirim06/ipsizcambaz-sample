@@ -1,0 +1,119 @@
+const express = require('express');
+const router = express.Router();
+const { Product } = require("../models/Product");
+const multer = require('multer');
+
+const { auth } = require("../middleware/auth");
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`)
+    },
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname)
+        if (ext !== '.jpg' || ext !== '.png') {
+            return cb(res.status(400).end('only jpg, png are allowed'), false);
+        }
+        cb(null, true)
+    }
+})
+
+var upload = multer({ storage: storage }).single("file")
+
+
+//=================================
+//             Product
+//=================================
+
+router.post("/uploadImage", auth, (req, res) => {
+
+    upload(req, res, err => {
+        if (err) {
+            return res.json({ success: false, err })
+        }
+        return res.json({ success: true, image: res.req.file.path, fileName: res.req.file.filename })
+    })
+
+});
+
+
+router.post("/uploadProduct", auth, (req, res) => {
+
+    //save all the data we got from the client into the DB 
+    const product = new Product(req.body)
+
+    product.save((err, product) => {
+        if (err) return res.status(400).json({ success: false, err })
+        Product.find({ '_id': product._id })
+            .populate('writer')
+            .exec((err, result) => {
+                if (err) return res.status(400).json({ success: false, err })
+                return res.status(200).json({ success: true, result })
+            })
+    })
+
+});
+
+
+router.post("/getProducts", auth, (req, res) => {
+    Product.find()
+        .populate("writer")
+        .exec((err, products) => {
+            if (err) return res.status(400).json({ success: false, err })
+            res.status(200).json({ success: true, products, postSize: products.length })
+        })
+});
+
+
+//?id=${productId}&type=single
+//id=12121212,121212,1212121   type=array 
+router.get("/products_by_id", (req, res) => {
+    let type = req.query.type
+    let productIds = req.query.id
+
+    console.log("req.query.id", req.query.id)
+
+    if (type === "array") {
+        let ids = req.query.id.split(',');
+        productIds = [];
+        productIds = ids.map(item => {
+            return item
+        })
+    }
+
+    console.log("productIds", productIds)
+
+
+    //we need to find the product information that belong to product Id 
+    Product.find({ '_id': { $in: productIds } })
+        .populate('writer')
+        .exec((err, product) => {
+            if (err) return res.status(400).send(err)
+            return res.status(200).send(product)
+        })
+});
+
+router.post("/update/:id", (req, res) => {
+    Product.findById(req.params._id)
+        .then(product => {
+            product.writer = product.writer
+            product.title = req.body.title;
+            product.description = req.body.description;
+            product.images = req.body.images;
+            product.response = req.body.response;
+            product.responseImages = req.body.responseImages;
+            product.status = req.body.status
+
+            product.save()
+                .then(() => res.json('product updated!'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+
+
+module.exports = router;
