@@ -1,0 +1,82 @@
+@import "./variables";
+// @import '~antd/dist/antd.css';
+
+a {
+  text-decoration: none;
+  color: $mainWhite;
+  &:hover {
+    text-decoration: underline;
+    color: $mainWhite;
+  }
+}
+
+body {
+  text-align: center;
+  color: $mainBlack;
+  background: $mainWhite;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.4;
+  padding-bottom: 20px;
+}
+
+.nav-links {
+  display: flex;
+  transition: $mainTransition;
+  padding: 10px;
+  color: $mainWhite;
+  float: right;
+  a {
+    display: block;
+    text-decoration: none;
+    transition: $mainTransition;
+    font-size: 0.8rem;
+    font-weight: 600;
+    &:hover {
+      color: $mainWhite;
+      text-decoration: underline;
+    }
+  }
+  .item {
+    padding-left: 10px;
+  }
+}
+.productbox {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.btnn-primary {
+  color: $mainBlack;
+  background: $primaryColor;
+  border: 3px solid $primaryColor;
+  display: inline-block;
+  transition: var(--mainTransition);
+
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    background: transparent;
+    border: 3px solid $primaryColor;
+    color: $mainBlack;
+  }
+  &::after{
+    background: transparent;
+    border: 3px solid $primaryColor;
+    color: $mainBlack;
+  }
+}
+
+.container {
+  padding-top: 50px;
+}
+
+.imagesBox {
+  max-width: 800px;
+  max-height: 450px;
+  height: fit-content;
+  margin-bottom: 20px;
+}
+.margin-bot-top {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

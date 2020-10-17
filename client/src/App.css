@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 * {
   margin: 0;
   padding: 0;
@@ -95,23 +96,6 @@ h6.thick {
 .btn-primary:hover {
   background: transparent;
   color: var(--primaryColor);
-}
-.loading {
-  text-transform: capitalize;
-  text-align: center;
-  margin-top: 3rem;
-}
-.error {
-  text-align: center;
-  text-transform: uppercase;
-  margin: 2rem 0;
-}
-.empty-search {
-  text-align: center;
-  text-transform: capitalize;
-  margin: 2rem 0;
-  padding: 1rem;
-  letter-spacing: var(--mainSpacing);
 }
 .hidden {
   display: none;

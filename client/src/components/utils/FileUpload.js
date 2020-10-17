@@ -40,7 +40,7 @@ function FileUpload(props) {
 
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Dropzone
                 onDrop={onDrop}
                 multiple={false}
@@ -49,7 +49,7 @@ function FileUpload(props) {
                 {({ getRootProps, getInputProps }) => (
                     <div style={{
                         width: '300px', height: '240px', border: '1px solid lightgray',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight:'20px'
                     }}
                         {...getRootProps()}
                     >

@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.24.1",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.3",
     "core-js": "^3.6.4",
     "dotenv": "^8.2.0",
     "formik": "^1.5.8",

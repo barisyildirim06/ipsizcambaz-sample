@@ -59,12 +59,36 @@ router.post("/uploadProduct", auth, (req, res) => {
 
 
 router.post("/getProducts", auth, (req, res) => {
-    Product.find()
+    let order = req.body.order ? req.body.order : "desc";
+    let sortBy = "_id";
+    let limit = req.body.limit ? parseInt(req.body.limit) : 100; // 
+    let skip = parseInt(req.body.skip)
+
+    let findArgs = req.body.filters
+    let term = req.body.searchTerms;
+
+    if(term) {
+        Product.find(findArgs)
+        .find({ $text: { $search: term } })
         .populate("writer")
+        .sort([[sortBy, order]])
+        .skip(skip)
+        .limit(limit)
         .exec((err, products) => {
             if (err) return res.status(400).json({ success: false, err })
             res.status(200).json({ success: true, products, postSize: products.length })
         })
+    } else {
+        Product.find(findArgs)
+        .populate("writer")
+        .sort([[sortBy, order]])
+        .skip(skip)
+        .limit(limit)
+        .exec((err, products) => {
+            if (err) return res.status(400).json({ success: false, err })
+            res.status(200).json({ success: true, products, postSize: products.length })
+        })
+    }
 });
 
 
@@ -96,23 +120,27 @@ router.get("/products_by_id", (req, res) => {
         })
 });
 
-router.post("/update/:id", (req, res) => {
-    Product.findById(req.params._id)
-        .then(product => {
-            product.writer = product.writer
-            product.title = req.body.title;
-            product.description = req.body.description;
-            product.images = req.body.images;
-            product.response = req.body.response;
-            product.responseImages = req.body.responseImages;
-            product.status = req.body.status
-
-            product.save()
-                .then(() => res.json('product updated!'))
-                .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
+router.post("/update", (req, res) => {
+    let productIds = req.query.id
+    Product.findById(productIds)
+        .populate("writer")
+        .then((product) => {
+            if (!product) res.status(404).send("Product is not found");
+            else {
+                product.writer = req.body.writer
+                product.title = req.body.title;
+                product.description = req.body.description;
+                product.images = req.body.images;
+                product.response = req.body.response;
+                product.responseImages = req.body.responseImages;
+                product.status = req.body.status
+                product.save()
+                    .then(() => res.json('product updated!'))
+                    .catch(err => res.status(400).json('Error: ' + err));
+            }
+        }).catch(err => res.status(400).json('Error: ' + err));
 })
+
 
 
 
