@@ -83,7 +83,22 @@ function SearchPage(props) {
             : null}
             <div className="row">{Products.map((product) => {
                 if (user.userData.isAdmin) {
-                    return props.history.push(`/admin`);
+                    return(
+                        <div className="col-lg-4 col-md-6 productbox">
+                            <div className="card" >
+                                {product.images.length ? 
+                                <img src={`../${product.images[0]}`} alt="." className="card-img-top"/> 
+                                : <img src={NoPhoto} alt="." className="card-img-top"/>}
+                                
+                                <div className="card-body">
+                                <h5 className="card-title">{`Writer : ${product.writer.name}`}</h5>
+                                    <h5 className="card-title">{`Title : ${product.title.length < maxTitleLength ? product.title : `${product.title.substring(0,maxTitleLength)}...`}`}</h5>
+                                    <p className="card-text">{`Description :${product.description.length < maxDescriptionLength ? product.description : `${product.description.substring(0,maxDescriptionLength)}...`}`}</p>
+                                    <Link to={`/update/${product._id}`} className="btn btn-outline-success">Update</Link>
+                                </div>
+                            </div>
+                        </div>
+                    )
                 } else if (user.userData._id === product.writer._id) {
                     return(
                         <div className="col-lg-4 col-md-6 productbox">
