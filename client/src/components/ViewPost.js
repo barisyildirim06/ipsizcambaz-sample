@@ -72,7 +72,7 @@ function ViewPost(props) {
                                 return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                             })}
                         </div>
-                        : <img src={NoPhoto} alt="." className="imagesBox" />}
+                        : <img src={NoPhoto} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />}
                 </div>
                 <h3 className="text-left">{`Title: ${title}`}</h3>
                         <h3 className="text-left">{status ? "Status: Open" : "Status: Closed"}</h3>
