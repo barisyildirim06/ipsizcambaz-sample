@@ -48,7 +48,7 @@ function SearchPage(props) {
 
 
     const getProducts = (variables) => {
-        Axios.post(`/api/product/getProducts?searchTerms=${searchTerms}&type=single`, variables)
+        return Axios.post(`/api/product/getProducts?searchTerms=${searchTerms}&type=single`, variables)
             .then(response => {
                 if (response.data.success) {
                     setLoaded(1)
@@ -118,6 +118,7 @@ function SearchPage(props) {
                     )
                         
                 }
+                return null
             })}</div>
         </div>
 

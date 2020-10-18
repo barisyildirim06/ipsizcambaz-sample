@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { connect } from 'react-redux'
 import $ from "jquery";
 import {
@@ -8,14 +8,6 @@ import {
 
 
 function SearchFeature(props) {
-    const [searchTerms, setSearchTerms] = useState("")
-    const [SearchClicked, setSearchClicked] = useState(false)
-    const updateSearchTerms = (event) => {
-        setSearchTerms(event.currentTarget.value)
-
-        props.refreshFunction(event.currentTarget.value)
-
-    }
 
     $("#myInput").keypress(function (event) {
         if (event.keyCode === 13) {

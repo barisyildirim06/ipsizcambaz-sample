@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import NoPhoto from '../images/no_photo.png'
 import { withRouter } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 
 function ViewPost(props) {
     const [Loaded, setLoaded] = useState(false)
@@ -69,10 +69,10 @@ function ViewPost(props) {
                     {images.length ?
                         <div>
                             {images.map((image) => {
-                                return (<img src={`../${image}`} alt="No Image" className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
+                                return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                             })}
                         </div>
-                        : <img src={NoPhoto} alt="No Image" className="imagesBox" />}
+                        : <img src={NoPhoto} alt="." className="imagesBox" />}
                 </div>
                 <h3 className="text-left">{`Title: ${title}`}</h3>
                         <h3 className="text-left">{status ? "Status: Open" : "Status: Closed"}</h3>
@@ -91,7 +91,7 @@ function ViewPost(props) {
                             <label for="AdminImages">Previous Response Images</label>
                             <div id="AdminImages">
                                 {responseImages.map((image) => {
-                                    return (<img src={`../${image}`} alt="No Image" className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
+                                    return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                                 })}
                             </div>
                         </div>
@@ -108,7 +108,7 @@ function ViewPost(props) {
                     ExtraCommentStatus ?
                         <div className="form-group">
                             <label for="Description">Extra Comment</label>
-                            <textarea className="form-control" rows="5" className="form-control" value={ExtraComment} id="Description"
+                            <textarea className="form-control" rows="5" value={ExtraComment} id="Description"
                                 onChange={changeExtraComment} />
                                 <br/>
                             {ExtraComment.length ? <button className="btn btn-outline-success" onClick={onSubmit}>Make Extra Comment</button> :

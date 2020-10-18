@@ -11,7 +11,6 @@ function Admin(props) {
     const user = useSelector(state => state.user)
     const [Products, setProducts] = useState([])
     const [Loaded, setLoaded] = useState(false)
-    const [Filters, setFilters] = useState([])
     let maxTitleLength = 16;
     let maxDescriptionLength = 20;
     useEffect(() => {
