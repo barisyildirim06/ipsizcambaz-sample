@@ -12,6 +12,7 @@ import Admin from './components/Admin';
 import EditPost from './components/EditPost'
 import NotFound from './components/NotFound';
 import ViewPost from './components/ViewPost';
+import SearchPage from './components/SearchPage';
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/" component={Auth(Home, true)} />
           <Route exact path="/uploadpost" component={Auth(UploadProductPage, true)} />
           <Route exact path="/update/:productId" component={Auth(EditPost, true)} />
+          <Route exact path="/search/:searchTerms" component={Auth(SearchPage, true)} />
           <Route exact path="/view/:productId" component={Auth(ViewPost, true)} />
           <Route exact path="/admin" component={Auth(Admin, true)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />

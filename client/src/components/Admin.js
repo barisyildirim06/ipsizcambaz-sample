@@ -60,17 +60,17 @@ function Admin(props) {
             {Loaded ? <div>
                 <h1>Admin Page</h1>
                 <div className="text-right">
-                    <div class="form-check form-check-inline">
-                        <input onClick={onOpen} name="inlineRadioOptions" class="form-check-input" type="radio" id="inlineRadio1" value="option1" />
-                        <label class="form-check-label" for="inlineRadio1">Show Open Posts</label>
+                    <div className="form-check form-check-inline">
+                        <input onClick={onOpen} name="inlineRadioOptions" className="form-check-input" type="radio" id="inlineRadio1" value="option1" />
+                        <label className="form-check-label" for="inlineRadio1">Show Open Posts</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input onClick={onClose} name="inlineRadioOptions" class="form-check-input" type="radio" id="inlineRadio2" value="option2" />
-                        <label class="form-check-label" for="inlineRadio2">Show Closed Posts</label>
+                    <div className="form-check form-check-inline">
+                        <input onClick={onClose} name="inlineRadioOptions" className="form-check-input" type="radio" id="inlineRadio2" value="option2" />
+                        <label className="form-check-label" for="inlineRadio2">Show Closed Posts</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input onClick={onTogether} name="inlineRadioOptions" class="form-check-input" type="radio" id="inlineRadio3" value="option3" defaultChecked/>
-                        <label class="form-check-label" for="inlineRadio3">Show All Posts</label>
+                    <div className="form-check form-check-inline">
+                        <input onClick={onTogether} name="inlineRadioOptions" className="form-check-input" type="radio" id="inlineRadio3" value="option3" defaultChecked/>
+                        <label className="form-check-label" for="inlineRadio3">Show All Posts</label>
                     </div>
                 </div>
             </div> : null}

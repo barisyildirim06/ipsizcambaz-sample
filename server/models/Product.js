@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const productSchema = mongoose.Schema({
     writer: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        index: true
     },
     title: {
         type: String,
@@ -35,14 +36,14 @@ const productSchema = mongoose.Schema({
 }, { timestamps: true })
 
 productSchema.index({
-    writer: 'text',
+    writer: 'Schema.Types.ObjectId',
     title:'text',
-    description: 'text'
+    description: 'text',
 }, {
     weights: {
         writer: 10,
         title:5,
-        description:1
+        description:1,
     }
 })
 
