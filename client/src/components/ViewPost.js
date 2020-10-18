@@ -47,7 +47,7 @@ function ViewPost(props) {
     const onSubmit = (e) => {
         e.preventDefault()
         setUserResponse(userResponse.push(ExtraComment))
-        
+
         console.log(userResponse)
 
         const product = {
@@ -75,15 +75,15 @@ function ViewPost(props) {
                         : <img src={NoPhoto} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />}
                 </div>
                 <h3 className="text-left">{`Title: ${title}`}</h3>
-                        <h3 className="text-left">{status ? "Status: Open" : "Status: Closed"}</h3>
+                <h3 className="text-left">{status ? "Status: Open" : "Status: Closed"}</h3>
                 <div className="form-group">
                     <label for="Description">Description</label>
-                    <textarea className="form-control" rows="5" value={description} id="Descrription" disabled/>
+                    <textarea className="form-control" rows="5" value={description} id="Descrription" disabled />
                 </div>
-                
+
                 <div>
                     <label for="Response">Admin Comment</label>
-                    <textarea className="form-control bkcolor" rows="5" value={response} id="Response" disabled/>
+                    <textarea className="form-control bkcolor" rows="5" value={response} id="Response" disabled />
                 </div>
                 <div>
                     {responseImages.length ?
@@ -98,11 +98,11 @@ function ViewPost(props) {
                         : null}
                 </div>
                 {userResponse.length ?
-                <div className="form-group">
-                    <br/>
-                    <label for="PreviousComments">Your Previous Comments</label>
-                <ul className="text-left" id="PreviousComments">{userResponse.map((resp) => (<li> {resp} </li>))}</ul>
-                </div>: null}
+                    <div className="form-group">
+                        <br />
+                        <label for="PreviousComments">Your Previous Comments</label>
+                        <ul className="text-left" id="PreviousComments">{userResponse.map((resp) => (<li> {resp} </li>))}</ul>
+                    </div> : null}
                 <br />
                 {
                     ExtraCommentStatus ?
@@ -110,12 +110,14 @@ function ViewPost(props) {
                             <label for="Description">Extra Comment</label>
                             <textarea className="form-control" rows="5" value={ExtraComment} id="Description"
                                 onChange={changeExtraComment} />
-                                <br/>
+                            <br />
                             {ExtraComment.length ? <button className="btn btn-outline-success" onClick={onSubmit}>Make Extra Comment</button> :
-                            <button className="btn btn-outline-success" onClick={onSubmit} disabled>Write Your Comment</button>}
+                                <button className="btn btn-outline-success" onClick={onSubmit} disabled>Write Your Comment</button>}
                         </div>
                         :
-                        <button className="btn btn-outline-success" onClick={ChangeExtraCommentStatus }>Make Extra Comment</button>
+                        <div className="form-group">
+                            <button className="btn btn-outline-success" onClick={ChangeExtraCommentStatus}>Make Extra Comment</button>
+                        </div>
                 }
 
             </div>

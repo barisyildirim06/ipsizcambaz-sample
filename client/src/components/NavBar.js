@@ -26,7 +26,7 @@ function Navbar(props) {
 
   return (
     <ReactBootStrap.Navbar bg="dark" variant="dark" expand="lg">
-      <ReactBootStrap.Navbar.Brand >Home</ReactBootStrap.Navbar.Brand>
+      <ReactBootStrap.Navbar.Brand ><Link to="/" >Home</Link></ReactBootStrap.Navbar.Brand>
       <ReactBootStrap.Navbar.Toggle aria-controls="basic-navbar-nav" />
       <ReactBootStrap.Navbar.Collapse id="basic-navbar-nav">
         <SearchFeature />
