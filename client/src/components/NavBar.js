@@ -24,7 +24,7 @@ function Navbar(props) {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+    <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
 
       <Link to="/" className="navbar-brand">Home</Link>
         <SearchFeature />

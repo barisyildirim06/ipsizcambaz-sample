@@ -27,11 +27,7 @@ function Home(props) {
                 if (response.data.success) {
                     setProducts(response.data.products)
                     setLoaded(true)
-                } else {
-                    if(user.userData.isAuth){
-                        alert('Failed to fectch product datas')
-                    }
-                }
+                } 
             })
     }
 
