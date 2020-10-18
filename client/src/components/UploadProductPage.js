@@ -77,11 +77,12 @@ function UploadProductPage(props) {
             />
             <br/>
             <br/>
-            <Button
+            <button
                 onClick={onSubmit}
+                className="btn btn-outline-success"
             >
                 Submit
-            </Button>
+            </button>
 
             </Form>
 

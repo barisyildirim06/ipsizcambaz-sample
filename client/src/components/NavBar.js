@@ -8,6 +8,7 @@ import axios from 'axios';
 import { USER_SERVER } from '../Config';
 import { useSelector } from "react-redux";
 import SearchFeature from "./utils/SearchFeature";
+import * as ReactBootStrap from "react-bootstrap"
 
 
 function Navbar(props) {
@@ -24,35 +25,26 @@ function Navbar(props) {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
-
-      <Link to="/" className="navbar-brand">Home</Link>
+    <ReactBootStrap.Navbar bg="dark" variant="dark" expand="lg">
+      <ReactBootStrap.Navbar.Brand >Home</ReactBootStrap.Navbar.Brand>
+      <ReactBootStrap.Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <ReactBootStrap.Navbar.Collapse id="basic-navbar-nav">
         <SearchFeature />
-        <div className="navbar-collapse">
-          {user.userData && !user.userData.isAuth ? <ul className="navbar-nav ml-auto nav-links">
-            <li className="nav-item">
-              <Link to="/login" className="item">Signin</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/register" className="item">Signup</Link>
-            </li>
-          </ul>
+        <ReactBootStrap.Nav className="ml-auto">
+          {user.userData && !user.userData.isAuth ?
+            <>
+              <ReactBootStrap.Nav.Link ><Link to="/login" >Signin</Link></ReactBootStrap.Nav.Link>
+              <ReactBootStrap.Nav.Link ><Link to="/register" >Signup</Link></ReactBootStrap.Nav.Link>
+            </>
             :
-            <ul className="navbar-nav ml-auto nav-links">
-              <li className="nav-item">
-                <Link to="/uploadpost" className="item">Upload Post</Link>
-              </li>
-              <li className="nav-item">
-                <Link onClick={logoutHandler} className="item">Logout</Link>
-              </li>
-            </ul>
+            <>
+              <ReactBootStrap.Nav.Link ><Link to="/uploadpost" >Upload Post</Link></ReactBootStrap.Nav.Link>
+              <ReactBootStrap.Nav.Link ><Link onClick={logoutHandler} >Logout</Link></ReactBootStrap.Nav.Link>
+            </>
           }
-
-        </div>
-      
-    </nav>
-
-
+        </ReactBootStrap.Nav>
+      </ReactBootStrap.Navbar.Collapse>
+    </ReactBootStrap.Navbar>
   )
 }
 
