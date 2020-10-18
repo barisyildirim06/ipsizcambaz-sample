@@ -37,3 +37,6 @@ input.error {
   height: 5px;
   margin-top: -12px;
 }
+
+@import '~antd/dist/antd.css';
+

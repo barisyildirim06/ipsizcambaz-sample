@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { loginUser } from "../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -81,9 +81,9 @@ function LoginPage(props) {
             <div className="signcard">
 
             <Title level={2}>Log In</Title>
-            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
+            <form onSubmit={handleSubmit} >
 
-              <Form.Item required>
+              <Form.Item required >
                 <Input
                 style={{width:"300px", paddingLeft:"15px"}}
                   id="email"
@@ -131,11 +131,13 @@ function LoginPage(props) {
                   forgot password
                   </a>
                 <div>
-                  <Button  type="primary" htmlType="submit" className="login-form-button" style={{ width: '300px' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                  <button className="btn btn-outline-success" type="primary" htmlType="submit" style={{ width: '300px' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     Log in
-                </Button>
+                </button>
                 </div>
-                Or <a href="/register">register now!</a>
+                <br/>
+                Or 
+                <Link to={'/register'} className="btn btn-outline-success">Register</Link>
               </Form.Item>
             </form>
           </div>

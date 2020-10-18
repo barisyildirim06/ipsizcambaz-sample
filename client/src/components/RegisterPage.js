@@ -9,8 +9,7 @@ import { useDispatch } from "react-redux";
 
 import {
   Form,
-  Input,
-  Button,
+  Input
 } from 'antd';
 
 
@@ -189,9 +188,9 @@ function RegisterPage(props) {
                 </Form.Item>
 
                 <Form.Item {...tailFormItemLayout}>
-                  <Button onClick={handleSubmit} type="primary" disabled={isSubmitting}>
+                  <button className="btn btn-outline-success" onClick={handleSubmit} type="primary" disabled={isSubmitting}>
                     Submit
-                </Button>
+                </button>
                 </Form.Item>
               </Form>
             </div>
