@@ -28,7 +28,9 @@ function Home(props) {
                     setProducts(response.data.products)
                     setLoaded(true)
                 } else {
-                    alert('Failed to fectch product datas')
+                    if(user.userData.isAuth){
+                        alert('Failed to fectch product datas')
+                    }
                 }
             })
     }

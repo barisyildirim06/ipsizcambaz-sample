@@ -1,5 +1,9 @@
 # İpsizCambaz Sample Project
 
+## See Live Version
+See Live:
+[https://ipsizcambaz.herokuapp.com/login](https://ipsizcambaz.herokuapp.com/login)
+
 ## Project setup
 1. create dev.js file inside of "./server/config" folder
 2. place in mongoDB information into dev.js file 
@@ -14,7 +18,7 @@ npm run dev
 ```
 
 ### Scripts
-```
+```json
 "scripts": {
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
@@ -24,13 +28,13 @@ npm run dev
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   }
 ```
-### For Testing Admin Version
-Connect with;
+### For Testing Admin & User Version
+For Admin connection sign-in with;
 - email: test11@gmail.com
 - password: test11
-### See Live Version
-See Live:
-[https://ipsizcambaz.herokuapp.com/login](https://ipsizcambaz.herokuapp.com/login)
+For Existing User connection sign-in with;
+- email: test22@gmail.com
+- password: test22 
 ### For Questions
 Linkedin Account:
 [https://www.linkedin.com/in/barış-yıldırım-933375194](https://www.linkedin.com/in/barış-yıldırım-933375194)
@@ -38,6 +42,7 @@ Gmail Account:
 yildrmbaris@gmail.com
 
 ### Code Explanation
+##### User Schema
 - Each user have following features.
 - Every new user assigned as `Normal User`. With the change of `Role` at database user can assigned as `Admin`
 - Emails should be `Unique`
@@ -53,8 +58,28 @@ const userSchema = mongoose.Schema({
     tokenExp :{type: Number}
 })
 ```
-
-
+##### Hash Password with Bcrypt
+- When password is modified, before saving password to User Schema, password is hashed with Bcrypt.
+```javascript
+userSchema.pre('save', function( next ) {
+    var user = this;
+    
+    if(user.isModified('password')){    
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            if(err) return next(err);
+    
+            bcrypt.hash(user.password, salt, function(err, hash){
+                if(err) return next(err);
+                user.password = hash 
+                next()
+            })
+        })
+    } else {
+        next()
+    }
+});
+```
+##### Product(Ticket) Schema
 - Each product have following features
 - Writers informations are referenced from userSchema
 ```javascript
@@ -156,6 +181,7 @@ router.post("/view", (req, res) => {
         }).catch(err => res.status(400).json('Error: ' + err));
 })
 ```
+
 
 
 
