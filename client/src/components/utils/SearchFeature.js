@@ -17,7 +17,6 @@ function SearchFeature(props) {
 
     }
 
-
     $("#myInput").keypress(function (event) {
         if (event.keyCode === 13) {
             event.preventDefault()
