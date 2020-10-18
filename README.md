@@ -2,7 +2,7 @@
 
 ## See Live Version
 See Live:
-[https://ipsizcambaz.herokuapp.com/login](https://ipsizcambaz.herokuapp.com/login)
+[https://ipsizcambaz.herokuapp.com](https://ipsizcambaz.herokuapp.com)
 
 ## Project setup
 1. create dev.js file inside of "./server/config" folder
@@ -10,6 +10,9 @@ See Live:
 3. create "./uploads" folder in main directory
 4. Type  " npm install " inside the "./server" directory  to download Server dependencies
 5. Type " npm install " inside the "./client" directory to download Client dependencies
+
+## Technologies Used
+`MongoDB`, `Node.js`, `Express.js`, `React.js`, `Redux`, `Bootstrap 4`, `Sass`  
 
 
 ### Compiles and hot-reloads for development
