@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeSearch: (event) => {
-            console.log("changed", event.target.value)
+            // console.log("changed", event.target.value)
             const action = { type: INPUT_VALUE, payload: event.target.value }
             dispatch(action)
         }

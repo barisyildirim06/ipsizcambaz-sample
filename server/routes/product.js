@@ -98,7 +98,7 @@ router.get("/products_by_id", (req, res) => {
     let type = req.query.type
     let productIds = req.query.id
 
-    console.log("req.query.id", req.query.id)
+    // console.log("req.query.id", req.query.id)
 
     if (type === "array") {
         let ids = req.query.id.split(',');
@@ -108,7 +108,7 @@ router.get("/products_by_id", (req, res) => {
         })
     }
 
-    console.log("productIds", productIds)
+    // console.log("productIds", productIds)
 
 
     //we need to find the product information that belong to product Id 
@@ -120,6 +120,7 @@ router.get("/products_by_id", (req, res) => {
         })
 });
 
+
 router.post("/update", (req, res) => {
     let productIds = req.query.id
     Product.findById(productIds)
@@ -127,10 +128,6 @@ router.post("/update", (req, res) => {
         .then((product) => {
             if (!product) res.status(404).send("Product is not found");
             else {
-                product.writer = req.body.writer
-                product.title = req.body.title;
-                product.description = req.body.description;
-                product.images = req.body.images;
                 product.response = req.body.response;
                 product.responseImages = req.body.responseImages;
                 product.status = req.body.status
@@ -141,6 +138,20 @@ router.post("/update", (req, res) => {
         }).catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.post("/view", (req, res) => {
+    let productIds = req.query.id
+    Product.findById(productIds)
+        .populate("writer")
+        .then((product) => {
+            if (!product) res.status(404).send("Product is not found");
+            else {
+                product.userResponse = req.body.userResponse
+                product.save()
+                    .then(() => res.json('product updated!'))
+                    .catch(err => res.status(400).json('Error: ' + err));
+            }
+        }).catch(err => res.status(400).json('Error: ' + err));
+})
 
 
 

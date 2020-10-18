@@ -8,39 +8,33 @@ import { connect, useSelector } from 'react-redux'
 function EditPost(props) {
     const user = useSelector(state => state.user)
     const [Loaded, setLoaded] = useState(false)
-    const [Ses, setSes] = useState([])
     const [title, setTitle] = useState('')
-    const [writer, setWriter] = useState('')
+    const [writer, setWriter] = useState([])
     const [description, setDescription] = useState('')
-    const [images, setImages] = useState('')
+    const [images, setImages] = useState([])
     const [response, setResponse] = useState('')
-    const [responseImages, setResponseImages] = useState('')
+    const [responseImages, setResponseImages] = useState([])
     const [status, setStatus] = useState('')
+    const [userResponse, setUserResponse] = useState([])
     const productId = props.match.params.productId
 
     useEffect(() => {
         const fetchData = async () => {
             await Axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
                 .then(response => {
-                    setSes(response.data[0])
                     setTitle(response.data[0].title)
                     setWriter(response.data[0].writer)
                     setDescription(response.data[0].description)
                     setImages(response.data[0].images)
                     setResponse(response.data[0].response)
                     setResponseImages(response.data[0].responseImages)
+                    setUserResponse(response.data[0].userResponse)
                     setStatus(response.data[0].status)
                     setLoaded(true)
                 })
         }
         fetchData()
     }, [])
-    const changeDescription = (e) => {
-        setDescription(e.target.value)
-    }
-    const changeTitle = (e) => {
-        setTitle(e.target.value)
-    }
     const changeResponse = (e) => {
         setResponse(e.target.value)
     }
@@ -54,53 +48,49 @@ function EditPost(props) {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(Ses)
 
         const product = {
-            writer: writer,
-            title: title,
-            description: description,
-            images: images,
             response: response,
             responseImages: responseImages,
-            status: status
+            status: status,
         }
 
-        console.log(product)
         Axios.post(`/api/product/update?id=${productId}&type=single`, product)
             .then(res => console.log(res.data))
             .then(props.history.push('/'));
     }
 
-
-    const newLocal = "clicked"
     return (
         <div >{Loaded ?
             <div>
                 {user.userData.isAdmin ? <form onSubmit={onSubmit}>
-                    <h1>{`Writer Name: ${writer.name}`}</h1>
+                    <h1 className="text-left">{`Writer Name: ${writer.name}`}</h1>
                     <div>
                         {images.length ?
                             <div>
                                 {images.map((image) => {
-                                    return (<img src={`../${image}`} alt="No Image" className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
+                                    return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                                 })}
                             </div>
-                            : <img src={NoPhoto} alt="No Image" className="imagesBox" />}
+                            : <img src={NoPhoto} alt="." className="imagesBox" />}
                     </div>
                     <div className="form-group">
                         <label for="Title">Title</label>
-                        <input type="text" className="form-control" value={title} id="Title"
-                            onChange={changeTitle} />
+                        <textarea rows="2" type="text" className="form-control" value={title} id="Title" disabled/>
                     </div>
                     <div className="form-group">
                         <label for="Description">Description</label>
-                        <textarea className="form-control" rows="5" className="form-control" value={description} id="Description"
-                            onChange={changeDescription} />
+                        <textarea className="form-control" rows="5" value={description} id="Description" disabled/>
                     </div>
+                    {userResponse.length ?
+                <div className="form-group">
+                    <br/>
+                    <label for="PreviousComments">User Responses After First Commit</label>
+                <ul className="text-left" id="PreviousComments">{userResponse.map((resp) => (<li> {resp} </li>))}</ul>
+                </div>: null}
                     <div className="form-group">
                         <label for="Response">Admin Comment</label>
-                        <textarea className="form-control" rows="5" className="form-control" value={response} id="Response"
+                        <textarea className="form-control" rows="5" value={response} id="Response"
                             onChange={changeResponse} />
                     </div>
                     <div>
@@ -110,7 +100,7 @@ function EditPost(props) {
                                 <label for="AdminImages">Previous Response Images</label>
                                 <div id="AdminImages">
                                     {responseImages.map((image) => {
-                                        return (<img src={`../${image}`} alt="No Image" className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
+                                        return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                                     })}
                                 </div>
                             </div>

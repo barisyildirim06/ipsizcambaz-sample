@@ -27,6 +27,10 @@ const productSchema = mongoose.Schema({
     status: {
         type: Number,
         default: 1
+    },
+    userResponse: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true })
 
