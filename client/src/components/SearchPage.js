@@ -20,10 +20,7 @@ function SearchPage(props) {
             searchTerms: searchTerms,
             filters: {status: [ 0,1 ]}
         }
-
         getProducts(variables)
-
-        
 
     }, [])
 
