@@ -72,7 +72,7 @@ function EditPost(props) {
                                     return (<img src={`../${image}`} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />)
                                 })}
                             </div>
-                            : <img src={NoPhoto} alt="." className="imagesBox" />}
+                            : <img src={NoPhoto} alt="." className="col-sm-6 col-lg-4 card-img-top margin-bot-top" />}
                     </div>
                     <div className="form-group">
                         <label for="Title">Title</label>
