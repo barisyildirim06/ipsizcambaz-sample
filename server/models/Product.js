@@ -36,14 +36,16 @@ const productSchema = mongoose.Schema({
 }, { timestamps: true })
 
 productSchema.index({
-    writer: 'Schema.Types.ObjectId',
     title:'text',
     description: 'text',
+    response: 'text',
+    userResponse: 'text'
 }, {
     weights: {
-        writer: 10,
-        title:5,
+        title:2,
         description:1,
+        response:1,
+        userResponse:1
     }
 })
 
